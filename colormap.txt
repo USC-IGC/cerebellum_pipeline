@@ -1,0 +1,43 @@
+################################################
+# ITK-SnAP Label Description File
+# File format: 
+# IDX   -R-  -G-  -B-  -A--  VIS MSH  LABEL
+# Fields: 
+#    IDX:   Zero-based index 
+#    -R-:   Red color component (0..255)
+#    -G-:   Green color component (0..255)
+#    -B-:   Blue color component (0..255)
+#    -A-:   Label transparency (0.00 .. 1.00)
+#    VIS:   Label visibility (0 or 1)
+#    IDX:   Label mesh visibility (0 or 1)
+#  LABEL:   Label description 
+################################################
+    0     0    0    0        0  0  0    "Clear Label"
+   12   255  255  150        1  1  1    "Corpus medullare"
+   33    88   95  255        1  1  1    "Left I-III"
+   36    53   55  143        1  1  1    "Right I-III"
+   43   175   52  255        1  1  1    "Left IV"
+   46    91   33  132        1  1  1    "Right IV"
+   53    36  140  255        1  1  1    "Left V"
+   56    31   91  163        1  1  1    "Right V"
+   60   255  190   10        1  1  1    "Vermis VI"
+   63   252    0  146        1  1  1    "Left VI"
+   66   185    0  106        1  1  1    "Right VI"
+   70   102  204  255        1  1  1    "Vermis VII"
+   73   255  143   13        1  1  1    "Left Crus I"
+   74   255    1   10        1  1  1    "Left Crus II"
+   75   255  203   22        1  1  1    "Left VIIB"
+   76   218  108   15        1  1  1    "Right Crus I"
+   77   193    8   12        1  1  1    "Right Crus II"
+   78   202  150   15        1  1  1    "Right VIIB"
+   80   125   43  183        1  1  1    "Vermis VIII"
+   83    13  191  108        1  1  1    "Left VIIIA"
+   84   153  238   18        1  1  1    "Left VIIIB"
+   86    16  127   72        1  1  1    "Right VIIIA"
+   87   108  168   13        1  1  1    "Right VIIIB"
+   90   253   74    8        1  1  1    "Vermis IX"
+   93     8  237  237        1  1  1    "Left IX"
+   96    10  160  209        1  1  1    "Right IX"
+  100   123  194    5        1  1  1    "Vermis X"
+  103   177  131    0        1  1  1    "Left X"
+  106   122   83    0        1  1  1    "Right X"
