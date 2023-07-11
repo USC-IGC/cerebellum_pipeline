@@ -1,5 +1,5 @@
 # CEREBELLUM PIPELINE
-The LoBes Cerebellum Pipeline includes the usage of ACAPULCO pipeline for cerebellum parcellation followed by QC scripts
+The LoBeS Cerebellum Pipeline includes the usage of ACAPULCO pipeline for cerebellum parcellation followed by QC scripts
 ## ACAPULCO 3 (AC3)
 This is a cerebellum pacellation pipeline. Automatic Cerebellum Anatomical Parcellation Using U-Net with Locally Constrained Optimization (ACAPULCO) located at `https://iacl.ece.jhu.edu/index.php?title=Cerebellum_CNN` is considered better than its previous software versions due to its repeatability, use of same weight metrics for the CNNs during parcellation and its nature to generate only useful files thereby saving storage space. The AC3 pipeline is run through a singularity container (`Acapulco_030.sif`) which inherently does n4 bias correction -> registration to MNI template -> parcellation
 ## Pipeline Workflow
