@@ -54,7 +54,7 @@ This text file contains the labels and the RGB values for the 28 Cerebellum ROIs
 This script is inherently called by `script_02_QC.sh`. It assigns colors to cerebellum ROIs in the slice image based on the `colormap.txt` and overlays it on the input image. It also checks for any over/incorrect segmentations outside a defined cerebellum bounding box and generates a text file containing the subject names if they failed the check.  
 ### make_html.sh
 This script gnerates an html containing all the pngs of the subjects in cohort for QC.  
-### Prerequisites
+#### Prerequisites
 A text file with all subject names/IDs in a cohort.  
 #### Anatomy of make_html call:
 ``./make_html.sh --subjects <subjects_list.txt> --pngdir <png/directory> --name <html/name>``  
