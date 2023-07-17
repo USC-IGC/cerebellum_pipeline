@@ -1,5 +1,10 @@
+#!/bin/bash
+# Combine csv
+# This script is to be run on the outputs of script_01_AC3.sh
+# Written by Siddharth Narula
 # -*- coding: utf-8 -*-
 #Not DONE
+
 import os
 import pandas as pd
 import csv
@@ -9,7 +14,7 @@ formatter = argparse.ArgumentDefaultsHelpFormatter
 parser = argparse.ArgumentParser(description=desc, formatter_class=formatter)
 
 parser.add_argument('-i', '--input', required=True,
-                    help='The image Path where all the folders containing CSVs are located')
+                    help='The Input Path where all the folders containing CSVs are located')
 parser.add_argument('-o', '--output_path',
                     help='The corresponding output_path for the csv file')
 args = parser.parse_args()

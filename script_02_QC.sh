@@ -9,15 +9,16 @@ function Usage(){
 
 Usage:
 
-$(basename "$0") --subject <subjectID> --input </mni/xxxx_n4_mni.nii.gz/path> --slice </parc/xxxx_n4_mni_seg_post.nii.gz> --outdir <output/directory> --play <cerebellum_playbook.py/path> --color <colormap.txt> 
+$(basename "$0") --subject <subjectID> --input </path/mni/xxxx_n4_mni.nii.gz> --slice </path/parc/xxxx_n4_mni_seg_post.nii.gz> --outdir <output/directory> --imagegen <cerebellum_image_generator.py/path> --label <colormap.txt> --bbtext <boundingboxfile/path/>
 
 Mandatory arguments:
     --subject   Provide a subject ID
     --input     Input image (This is the /mni/xxxx_n4_mni.nii.gz inside AC3 output directory of a subject)
     --slice     Slice image (This is the /parc/xxx_n4_mni_seg_post.nii.gz  inside AC3 output directory of a subject)
     --outdir    Output directory to store pngs
-    --play      cerebellum_playbook.py script path
-    --color     colormap.txt file path
+    --imagegen  cerebellum_image_generator.py script path
+    --label     colormap.txt file path
+    --bbtext    Path along with textfile name to store bounding box failed subjects
 
 Please provide absolute path in all arguments
 
@@ -51,12 +52,16 @@ while [[ $# -gt 0 ]]; do
             output_dir=$2
             shift 2
             ;;
-        --play)
-            playbook_dir=$2
+        --imagegen)
+            image_generator_dir=$2
             shift 2
             ;;
-        --color)
+        --label)
             colormap_txt=$2
+            shift 2
+            ;;
+        --bbtext)
+            bbtext=$2
             shift 2
             ;;
         *) # Unexpected option
@@ -66,8 +71,8 @@ while [[ $# -gt 0 ]]; do
 done
 
 # Checking mandatory arguments
-if [[ -z ${subjectID} || -z ${input_image} ||  -z ${slice_image} || -z ${output_dir} || -z ${playbook_dir} || -z ${colormap_txt} ]]; then
-	echo "ERROR: --subject --input, --slice, --outdir, --bind are mandatory arguments. Please see usage: \n"
+if [[ -z ${subjectID} || -z ${input_image} ||  -z ${slice_image} || -z ${output_dir} || -z ${image_generator_dir} || -z ${colormap_txt} || -z ${bbtext} ]]; then
+	echo "ERROR: --subject --input, --slice, --outdir, --imagegen --label --bbtext are mandatory arguments. Please see usage: \n"
     Usage >&2
 fi
 
@@ -78,14 +83,12 @@ echo "Output Directory: ${output_dir}/img/${subjectID}"
 rm -rf ${output_dir}/img/${subjectID}
 mkdir -p ${output_dir}/img/${subjectID}
 
-echo "Cerebellum playbook located at: ${playbook_dir}"
+echo "Cerebellum image generation script located at: ${image_generator_dir}"
 echo "Colormap text file: ${colormap_txt}"
 
-python ${playbook_dir}/cerebellum_playbook.py -i $input_image -l $slice_image -c ${colormap_txt}/colormap.txt -o ${output_dir}/img/${subjectID}/coronal -v coronal
-echo "Done generating coronal pngs at: ${output_dir}/img/${subjectID}/coronal"
-python ${playbook_dir}/cerebellum_playbook.py -i $input_image -l $slice_image -c ${colormap_txt}/colormap.txt -o ${output_dir}/img/${subjectID}/sagittal -v sagittal
-echo "Done generating sagittal pngs at: ${output_dir}/img/${subjectID}/sagittal"       
-python ${playbook_dir}/cerebellum_playbook.py -i $input_image -l $slice_image -c ${colormap_txt}/colormap.txt -o ${output_dir}/img/${subjectID}/axial -v axial
-echo "Done generating axial pngs at: ${output_dir}/img/${subjectID}/axial"
+python ${image_generator_dir}/cerebellum_image_generator.py -i $input_image -l $slice_image -c ${colormap_txt}/colormap.txt -o ${output_dir}/img/${subjectID}/ -t ${bbtext} -s ${subjectID} 
+
+chmod -R 770 ${output_dir}/img/${subjectID}
 
 echo "Done generating all pngs at: ${output_dir}/img/${subjectID}"
+echo "Bounding box failed subject info at: $bbtext"

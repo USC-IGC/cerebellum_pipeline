@@ -1,4 +1,8 @@
+# Cwerebellum Check_if_csv_exists
+# This script checks if csvs have been generated in the AC3 output folder
+# Written by Siddharth Narula
 # -*- coding: utf-8 -*-
+
 import os
 import argparse
 
