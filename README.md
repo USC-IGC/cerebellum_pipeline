@@ -22,11 +22,12 @@ Downloading Acapulco_030.sif: The .sif file can be downloaded from the above web
 #### MP2RAGE Acquisition Image Handling  
 We noticed that AC3 did not perform well on T1w MP2RAGE acquired images and hence have added an __AFNI__ step to handle such images to improve the AC3 failure rate.  
 __Background:__
-MP2RAGE collects 2 sets of Gradient Echo signals for each inversion pulse using 2 turbo flash GREs. The first inversion pulse (inv1) inverts the longitudinal magnetization of all tissues, while the second inversion pulse (inv2) selectively nulls the signal from cerebrospinal fluid (CSF) in order to improve the contrast between gray matter (GM) and white matter (WM). The UNIT method is a modification of the original MP2RAGE sequence that aims to improve the uniformity of image intensity across the brain, helping in improving the contract of the image. Any subject acquired this way has T1w, UNIT, INV2 and INV1 images available.  
+MP2RAGE collects 2 sets of Gradient Echo signals for each inversion pulse using 2 turbo flash GREs. The first inversion pulse (inv1) inverts the longitudinal magnetization of all tissues, while the second inversion pulse (inv2) selectively nulls the signal from cerebrospinal fluid (CSF) in order to improve the contrast between gray matter (GM) and white matter (WM). The UNIT method is a modification of the original MP2RAGE sequence that aims to improve the uniformity of image intensity across the brain, helping in improving the contract of the image. Any subject acquired this way has UNIT, INV2 and INV1 images available.  
 We perform the following functions defined in AFNI, a software developed for the analysis and display of anatomical and functional MRI (FMRI) data, on the inv2 and UNIT images  
 * `3dcopy`, to make the inv2 available for AFNI  
 * `3dinfo`, to extract maximum and minimum intensities of the inv2  
 * `3dcalc`, to apply these intensity mappings on the UNIT image by taking a mean at each point of inv2 and then multiplying it with UNIT images intensity.  
+The output of this step becomes the input to AC3.  
 ##### Prerequisites
 The AFNI software requires R and Python to be pre-installed on your system.  
 #### Anatomy of script_01_AC3.sh call:
