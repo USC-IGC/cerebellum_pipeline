@@ -100,8 +100,7 @@ A text file with all subject names/IDs in a cohort.
 Example:``./make_html.sh --subjects /ifs/loni/faculty/mydirectory/subjects_list.txt --pngdir /ifs/loni/faculty/mydirectory/QC --name QC_Cohort1``  
 Outputs: __QC_Cohort1_coronal.html__ and __QC_Cohort1_sagittal.html__  
 CSVs: __AC3_QC_Coronal.csv__ and __AC3_QC_Sagittal.csv__  
-Merging the two csvs: Merging the two CSVs can be done either in python or R to get the complete list of QC failed subjects taking both the views into account. Here is the command in python:  
-``     ``  
+Merging the two csvs: Merging the two CSVs can be done either in python or R to get the complete list of QC failed subjects taking both the views into account.  
 Here are some examples of the Html:  
 __Coronal View__  
 ![Example of Coronal View Html](https://github.com/USC-IGC/cerebellum_pipeline/blob/main/images/Html_Coronal_View_Example.png)  
