@@ -118,7 +118,7 @@ parser.add_argument('-l', '--label_image',
 parser.add_argument('-o', '--output', help='The output folder.')
 parser.add_argument('-c', '--color_map', help='The file for colormap')
 parser.add_argument('-t','--text_file',help='Output Text Path')
-parser.add_argument('-s','--subject_name',help='Name of Subject')
+parser.add_argument('-s','--subject',help='Name of Subject')
 args = parser.parse_args()
 
 def load_colors(colors_path):
@@ -211,7 +211,7 @@ else:
         create_images(view_slices['coronal'], [slice(None), view_slices['coronal'][i], slice(13, 90,1)],'coronal',view_slices['coronal'][i])
         create_images(view_slices['sagittal'], [view_slices['sagittal'][i], slice(110, 190,1), slice(13, 90,1)],'sagittal',view_slices['sagittal'][i])
     file1 = open(args.text_file, "a+")  # append mode
-    op = args.subject_name
+    op = args.subject
     file1.write(op)
     file1.write("\n")
     file1.close()
