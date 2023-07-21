@@ -12,7 +12,7 @@ $(basename "$0") --subject <subjectID> --input <T1/image/path/or/UNIT/image/path
 
 Mandatory arguments:
     --subject	    Provide a subject ID
-    --input		    Input T1 image with absolute path or in case of MP2RAGE acquisition it will be the full path of the UNIT image
+    --input	    Input T1 image with absolute path or in case of MP2RAGE acquisition it will be the full path of the UNIT image
     --outdir	    Output directory
     --container	    Directory where singularity container is located
     --bind          Directory to which ingularity container is to be binded
