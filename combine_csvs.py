@@ -15,8 +15,8 @@ parser = argparse.ArgumentParser(description=desc, formatter_class=formatter)
 
 parser.add_argument('-i', '--input', required=True,
                     help='The Input Path where all the folders containing CSVs are located')
-parser.add_argument('-o', '--output_path',
-                    help='The corresponding output_path for the csv file')
+parser.add_argument('-o', '--output',
+                    help='The corresponding output path for the csv file')
 args = parser.parse_args()
 parent = str(args.input)
 print("Started")
@@ -46,7 +46,7 @@ for f in file_paths:
         #print(files_in_folder.index(f))   
         dict_columns[name]=vol
     main_dict.append(dict_columns)
-output = str(args.output_path)+"Cerebellum_data_all_csvs.csv"
+output = str(args.output)+"Cerebellum_data_all_csvs.csv"
 with open(output, 'w', encoding='UTF8',newline='') as f:
     writer = csv.DictWriter(f, fieldnames=columns)
     writer.writeheader()
