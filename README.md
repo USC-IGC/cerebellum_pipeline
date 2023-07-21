@@ -31,7 +31,10 @@ The output of this step becomes the input to AC3.
 ##### Prerequisites
 The AFNI software requires R and Python to be pre-installed on your system.  
 #### Anatomy of script_01_AC3.sh call:
-``./script_01_AC3.sh --subject <subjectID> --input <T1/image/path> --outdir <output/directory> --container <singularity/directory> --bind <singularity/bind/directory> --mp2rage <mp2rage/acquisition/true/false> --inv2image <inv2image/path/(optional)> --afnipath <AFNI/software/path/(optional)> --rpath <R/software/path/(optional)> --pythonpath <python/software/path/(optional)> ``  
+    script_01_AC3.sh --subject <subjectID> --input <T1/image/path> --outdir <output/directory> 
+                     --container <singularity/directory> --bind <singularity/bind/directory> 
+                     --mp2rage <mp2rage/acquisition/true/false> --inv2image <inv2image/path/(optional)> 
+                     --afnipath <AFNI/software/path/(optional)>   
 
 `--subject`: This the subjectID to be run  
 `--input`: The absolute path to the T1 image of the subject  
