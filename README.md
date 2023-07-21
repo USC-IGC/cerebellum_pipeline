@@ -44,12 +44,10 @@ The AFNI software requires R and Python to be pre-installed on your system.
 `--mp2rage`: If the input image is an MP2RAGE acquisition enter true else false  
 `--inv2image`: Path to Inv2 image of a subject if it is MP2RAGE acquired (optional)  
 `--afnipath`: path to AFNI software (optional)  
-`--rpath`: path to R software (optional)  
-`--pythonpath`: Path to PYTHON software (optional)  
 
-Example 1: ``./script_01_AC3.sh --subject subject0000 --input /ifs/loni/faculty/mydirectory/subject0000/sub-0000_T1.nii.gz --outdir /ifs/loni/faculty/mydirectory --container /ifs/loni/faculty/mydirectory --bind /ifs/loni/faculty --mp2rage false``  
+Example 1: ``./script_01_AC3.sh --subject subject0000 --input /mypath/mydirectory/subject0000/sub-0000_T1.nii.gz --outdir /mypath/mydirectory --container /mypath/mydirectory/acapulco_030.sif --bind /mypath --mp2rage false``  
 
-Example 2: ``./script_01_AC3.sh --subject subject0000 --input /ifs/loni/faculty/mydirectory/subject0000/sub-0000_UNIT1.nii.gz --outdir /ifs/loni/faculty/mydirectory --container /ifs/loni/faculty/mydirectory --bind /ifs/loni/faculty --mp2rage true --inv2image /ifs/loni/faculty/mydirectory/subject0000/sub-0000_inv-2_MP2RAGE.nii.gz --afnipath /ifs/loni/faculty/mydirectory/software/AFNI --rpath /ifs/loni/faculty/mydirectory/software/R --pythonpath /ifs/loni/faculty/mydirectory/software/PYTHON ``  
+Example 2: ``./script_01_AC3.sh --subject subject0000 --input /mypath/mydirectory/subject0000/sub-0000_UNIT1.nii.gz --outdir /mypath/mydirectory --container /mypath/mydirectory/acapulco_030.sif --bind /mypath --mp2rage true --inv2image /mypath/mydirectory/subject0000/sub-0000_inv-2_MP2RAGE.nii.gz --afnipath /mypath/mydirectory/software/AFNI ``  
 
 A qsub wrapper can be created by the user for this script to run for large cohorts.  
 
@@ -60,7 +58,7 @@ This script identifies the subjects that AC3 failed to generate outputs for by c
 #### Anatomy of check_if_csv_exists.py call:
 ``python check_if_csv_exists.py -i <AC3/output/directory>``  
 
-Example:``python check_if_csv_exists.py -i /ifs/loni/faculty/mydirectory``  
+Example:``python check_if_csv_exists.py -i /mypath/mydirectory``  
 `-i`: The absolute path to the AC3 output directory containing the subjects folders  
 
 ### script_02_QC.sh
@@ -71,7 +69,8 @@ This text file contains the labels and the RGB values for the 28 Cerebellum ROIs
 #### cerebellum_image_generator.py
 This script is inherently called by `script_02_QC.sh`. It assigns colors to cerebellum ROIs in the slice image based on the `colormap.txt` and overlays it on the input image with some transparency so that the underlaying anatomy is visible. It also checks for any over/incorrect segmentations outside a defined cerebellum bounding box (the dimensions of the bounding box have been chosen based on where one might expect to locate the cerebellum in a 3D image) and generates a text file containing the subject names if they failed the check. It generates an img folder within the output directory that contains .png files of the various anatomical views(axial/coronal/sagittal) and 10 slices per view of a subject which show maximum information of the cerebellum ROIs required for QC.  
 #### Anatomy of script_02_QC.sh call:
-``./script_02_QC.sh --subject <subjectID> --input </path/mni/xxxx_n4_mni.nii.gz> --slice </path/parc/xxxx_n4_mni_seg_post.nii.gz> --outdir <output/directory> --imagegen <cerebellum_image_generator.py/path> --label <colormap.txt> --bbtext <boundingboxfile/path/> ``
+    script_02_QC.sh --subject <subjectID> --input </path/mni/xxxx_n4_mni.nii.gz> --slice </path/parc/xxxx_n4_mni_seg_post.nii.gz> --outdir <output/directory> 
+                    --imagegen <cerebellum_image_generator.py/path> --label <colormap.txt> --bbtext <boundingboxfile/path/>   
 
 `--subject`: This the subjectID to be run  
 `--input`: The absolute path to the Input image (This is the /mni/xxxx_n4_mni.nii.gz inside AC3 output directory of a subject)  
@@ -81,7 +80,7 @@ This script is inherently called by `script_02_QC.sh`. It assigns colors to cere
 `--label`: Path to colormap.txt file  
 `--bbtext`: Path along with textfile name to store bounding box failed subjects  
 
-Example: ``./script_02_QC.sh --subject subject0000 --input /ifs/loni/faculty/mydirectory/subject0000/mni/subject0000_T1_n4_mni.nii.gz --slice /ifs/loni/faculty/mydirectory/subject0000/parc/subject0000_T1_n4_mni_seg_post.nii.gz --outdir /ifs/loni/faculty/mydirectory/QC --imagegen /ifs/loni/faculty/mydirectory/cerebellum_image_generator.py --label /ifs/loni/faculty/mydirectory/colormap.txt --bbtext /ifs/loni/faculty/mydirectory/QC/BoundingBox_failed_subjects.txt``  
+Example: ``./script_02_QC.sh --subject subject0000 --input /mypath/mydirectory/subject0000/mni/subject0000_T1_n4_mni.nii.gz --slice /mypath/mydirectory/subject0000/parc/subject0000_T1_n4_mni_seg_post.nii.gz --outdir /mypath/mydirectory/QC --imagegen /mypath/mydirectory/cerebellum_image_generator.py --label /mypath/mydirectory/colormap.txt --bbtext /mypath/mydirectory/QC/BoundingBox_failed_subjects.txt``  
 
 A qsub wrapper can be created by the user for this script to run for large cohorts.  
 
@@ -95,13 +94,13 @@ The Html has the same properties of any other webpage which allows the user to s
 #### Prerequisites
 A text file with all subject names/IDs in a cohort.  
 #### Anatomy of make_html call:
-``./make_html.sh --subjects <subjects_list.txt> --pngdir <png/directory> --name <html/name>``   
+    make_html.sh --subjects <subjects_list.txt> --pngdir <png/directory> --name <html/name>   
 
 `--subjects`: The absolute path to the text file containing a list of subject IDs  
 `--pngdir`: The absolute path to the directory containing the img folder  
 `--name`: Name of the html to be generated  
 
-Example:``./make_html.sh --subjects /ifs/loni/faculty/mydirectory/subjects_list.txt --pngdir /ifs/loni/faculty/mydirectory/QC --name QC_Cohort1``  
+Example:``./make_html.sh --subjects /mypath/mydirectory/subjects_list.txt --pngdir /mypath/mydirectory/QC --name QC_Cohort1``  
 Outputs: __QC_Cohort1_coronal.html__ and __QC_Cohort1_sagittal.html__  
 CSVs: __AC3_QC_Coronal.csv__ and __AC3_QC_Sagittal.csv__  
 Merging the two csvs: Merging the two CSVs can be done either in python or R to get the complete list of QC failed subjects taking both the views into account.  
@@ -141,7 +140,7 @@ It merges the .csvs obtained as part of AC3 of all the subjects in a cohort to g
 #### Anatomy of combine_csvs.py call:
 ``python combine_csvs.py -i <AC3/output/directory> -o <output/directory>``  
 
-Example:``python combine_csvs.py -i /ifs/loni/faculty/mydirectory -o /ifs/loni/faculty/mydirectory/QC``   
+Example:``python combine_csvs.py -i /mypath/mydirectory -o /mypath/mydirectory/QC``   
 
 `-i`: The absolute path to the AC3 output directory containing all the subjeect folders  
 `-o`: The absolute path to where you want to save the combined csv  

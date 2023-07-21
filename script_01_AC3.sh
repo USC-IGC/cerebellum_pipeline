@@ -8,19 +8,17 @@ function Usage(){
 
 Usage:
 
-$(basename "$0") --subject <subjectID> --input <T1/image/path/or/UNIT/image/path> --outdir <output/directory> --container <singularity/directory> --bind <singularity/bind/directory> --mp2rage <mp2rage/acquisition/true/false> --inv2image <inv2image/path/(optional)> --afnipath <AFNI/software/path> --rpath <R/software/path> --pythonpath <python/software/path> 
+$(basename "$0") --subject <subjectID> --input <T1/image/path/or/UNIT/image/path> --outdir <output/directory> --container <singularity/directory/path> --bind <singularity/bind/directory> --mp2rage <mp2rage/acquisition/true/false> --inv2image <inv2image/path/(optional)> --afnipath <AFNI/software/path>  
 
 Mandatory arguments:
-    --subject	    Provide a subject ID
-    --input	    Input T1 image with absolute path or in case of MP2RAGE acquisition it will be the full path of the UNIT image
-    --outdir	    Output directory
-    --container	    Directory where singularity container is located
+    --subject       Provide a subject ID
+    --input         Input T1 image with absolute path or in case of MP2RAGE acquisition it will be the full path of the UNIT image
+    --outdir        Output directory
+    --container     Path to singularity container
     --bind          Directory to which ingularity container is to be binded
     --mp2rage       If the input image is an MP2RAGE acquisition enter true else false
     --inv2image     Path to the second inversion image (INV2) image of a subject if it is MP2RAGE acquired
     --afnipath      path to AFNI software (optional)
-    --rpath         path to R software (optional)
-    --pythonpath    Path to PYTHON software (optional)
 
 Please provide absolute path in all arguments
 If your image is MP2RAGE acquired please ensure that AFNI, R and PYTHON are installed on your system before running this script
@@ -71,14 +69,6 @@ while [[ $# -gt 0 ]]; do
             afnipath=$2
             shift 2
             ;;
-        --rpath)
-            rpath=$2
-            shift 2
-            ;;
-        --pythonpath)
-            python=$2
-            shift 2
-            ;;
         *) # Unexpected option
             Usage >&2
             ;;
@@ -102,16 +92,6 @@ mkdir -p ${output_dir}/${subjectID}
 if [[ "$acq" == true ]]
 then
     export PATH=$PATH:$afnipath
-    export R_LIBS=$rpath
-    export PYTHONPATH=$python
-    # set up tab completion for AFNI programs
-    if [ -f $HOME/.afni/help/all_progs.COMP.bash ]
-    then
-        source $HOME/.afni/help/all_progs.COMP.bash
-    fi
-    export AFNI_NIFTI_TYPE_WARN=NO
-    export AFNI_ENVIRON_WARNINGS=NO
-
     3dcopy $inv2image ${output_dir}/${subjectID}/${subjectID}_bfc.nii
     out_name=${subjectID}_clean.nii
     int_max=$(3dinfo -dmaxus $inv2image)
@@ -134,7 +114,7 @@ echo "Singularity loaded"
 echo "Singularity Bind Path: ${bind_dir}"
 
 # Command to run AC3
-CMD="singularity run --cleanenv -B ${bind_dir}:${bind_dir} ${singularity_container_dir}/acapulco_030.sif -i ${input_image} -o ${output_dir}/${subjectID}";
+CMD="singularity run --cleanenv -B ${bind_dir}:${bind_dir} ${singularity_container_dir} -i ${input_image} -o ${output_dir}/${subjectID}";
 
 echo "Running: ${CMD}"
 eval $CMD
@@ -142,5 +122,3 @@ eval $CMD
 echo "ACUPULCO 3.0 outputs available for ${subjectID}"
 
 chmod 770 ${output_dir}/${subjectID}
-
-
