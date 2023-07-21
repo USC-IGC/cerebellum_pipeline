@@ -17,7 +17,7 @@ Mandatory arguments:
     --container	    Directory where singularity container is located
     --bind          Directory to which ingularity container is to be binded
     --mp2rage       If the input image is an MP2RAGE acquisition enter true else false
-    --inv2image     Path to Inv2 image of a subject if it is MP2RAGE acquired (optional)
+    --inv2image     Path to the second inversion image (INV2) image of a subject if it is MP2RAGE acquired
     --afnipath      path to AFNI software (optional)
     --rpath         path to R software (optional)
     --pythonpath    Path to PYTHON software (optional)
