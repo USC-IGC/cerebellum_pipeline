@@ -1,13 +1,8 @@
-# Cwerebellum Check_if_csv_exists
-# This script checks if csvs have been generated in the AC3 output folder
-# Written by Siddharth Narula
-# -*- coding: utf-8 -*-
-
 import os
 import argparse
 
-desc = ('Convert a nii image to pictures of slices. If the image and the label '
-        'image are both given, their overlay is converted')
+desc = ('checks if csvs have been generated in the AC3 output folder')
+
 formatter = argparse.ArgumentDefaultsHelpFormatter
 parser = argparse.ArgumentParser(description=desc, formatter_class=formatter)
 parser.add_argument('-i', '--input', required=True,
@@ -34,4 +29,3 @@ file = open('subjects_without_csv.txt','w')
 for sub in list_subjects:
 	file.write(sub+"\n")
 file.close()
-
