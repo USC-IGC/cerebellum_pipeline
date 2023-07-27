@@ -5,13 +5,13 @@ The LoBeS Cerebellum Pipeline provides wrappers to run ACAPULCO pipeline for cer
 The Cerebellum Pipeline contains scripts that have be run in the following order:
 | Script to be run by user | Inherently calls |
 |--------------------------|------------------|
-| script_01_AC3.sh         | - Acapulco_030.sif |
+| [script_01_AC3.sh](#script_01_AC3.sh)         | - Acapulco_030.sif |
 |                          | - AFNI, R, PYTHON softwares |
-| check_if_csv_exists.py   |                  |
-| script_02_QC.sh          |  - colormap.txt  |
+| [check_if_csv_exists.py](#check_if_csv_exists.py)   |                  |
+| [script_02_QC.sh](#script_02_QC.sh)          |  - colormap.txt  |
 |                          |  - cerebellum_image_generator.py |
-| make_html.sh             | 									|
-| combine_csvs.py          |                  |
+| [make_html.sh](#make_html.sh)             | 									|
+| [combine_csvs.py](#combine_csvs.py)          |                  |
 
 ### script_01_AC3.sh  
 This script is a wrapper to run ACAPULCO 3.0 for cerebellum parcellation for a single subject on a linux cluster. It creates a subject folder with the given subjectID inside the given output directory. This script also runs AFNI on MP2RAGE acquired images so that they can be handled properly by AC3.  
@@ -56,7 +56,7 @@ Not needed when running for a single subject but very useful when running AC3 on
 This script identifies the subjects that AC3 failed to generate outputs for by checking if xxxx_n4_mni_seg_post_volumes.csv file exists as it is the last generated output of a successful AC3 run. It generates another text file containing the failed subset of subjects which can be used as the new input to script_01_AC3.sh especially when running large cohorts.  
 
 #### Anatomy of check_if_csv_exists.py call:
-``python check_if_csv_exists.py -i <AC3/output/directory>``  
+    python check_if_csv_exists.py -i <AC3/output/directory>     
 
 Example:``python check_if_csv_exists.py -i /mypath/mydirectory``  
 `-i`: The absolute path to the AC3 output directory containing the subjects folders  
@@ -138,7 +138,7 @@ This case would have been identified in the `BoundingBox_failed_subjects.txt` fi
 Not needed for a single subject but is very useful for large cohorts.  
 It merges the .csvs obtained as part of AC3 of all the subjects in a cohort to generate a master spreadsheet.  
 #### Anatomy of combine_csvs.py call:
-``python combine_csvs.py -i <AC3/output/directory> -o <output/directory>``  
+    python combine_csvs.py -i <AC3/output/directory> -o <output/directory>      
 
 Example:``python combine_csvs.py -i /mypath/mydirectory -o /mypath/mydirectory/QC``   
 
