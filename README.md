@@ -13,7 +13,7 @@ The Cerebellum Pipeline contains scripts that have be run in the following order
 | [make_html.sh](#make_html.sh)             | 									|
 | [combine_csvs.py](#combine_csvs.py)          |                  |
 
-### script_01_AC3.sh  
+### script_01_AC3.sh<a name="script_01_AC3.sh"></a>  
 This script is a wrapper to run ACAPULCO 3.0 for cerebellum parcellation for a single subject on a linux cluster. It creates a subject folder with the given subjectID inside the given output directory. This script also runs AFNI on MP2RAGE acquired images so that they can be handled properly by AC3.  
 
 #### ACAPULCO 3 (AC3)
@@ -51,7 +51,7 @@ Example 2: ``./script_01_AC3.sh --subject subject0000 --input /mypath/mydirector
 
 A qsub wrapper can be created by the user for this script to run for large cohorts.  
 
-### check_if_csv_exists.py
+### check_if_csv_exists.py<a name="check_if_csv_exists.py"></a>  
 Not needed when running for a single subject but very useful when running AC3 on large cohorts.  
 This script identifies the subjects that AC3 failed to generate outputs for by checking if xxxx_n4_mni_seg_post_volumes.csv file exists as it is the last generated output of a successful AC3 run. It generates another text file containing the failed subset of subjects which can be used as the new input to script_01_AC3.sh especially when running large cohorts.  
 
@@ -61,7 +61,7 @@ This script identifies the subjects that AC3 failed to generate outputs for by c
 Example:``python check_if_csv_exists.py -i /mypath/mydirectory``  
 `-i`: The absolute path to the AC3 output directory containing the subjects folders  
 
-### script_02_QC.sh
+### script_02_QC.sh<a name="script_02_QC.sh"></a>  
 This script is a wrapper for `cerebellum_image_generator.py`.  
 
 #### colormap.txt
@@ -84,7 +84,7 @@ Example: ``./script_02_QC.sh --subject subject0000 --input /mypath/mydirectory/s
 
 A qsub wrapper can be created by the user for this script to run for large cohorts.  
 
-### make_html.sh  
+### make_html.sh<a name="make_html.sh"></a>    
 
 This script generates two htmls - 1 sagittal and 1 coronal containing 5 slices/view which show all the 28 ROIs for fast QC.
 The logic in each of the html dictates that all subjects are QC Pass unless the subjectID button is clicked upon. Upon clicking the subjectID button, it is identified as QC Fail and is disabled. A notes box is present to add reasoning for the failure.
