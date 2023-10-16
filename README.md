@@ -80,7 +80,7 @@ This script is inherently called by `script_02_QC.sh`. It assigns colors to cere
 `--label`: Path to colormap.txt file  
 `--bbtext`: Path along with textfile name to store bounding box failed subjects  
 
-Example: ``./script_02_QC.sh --subject subject0000 --input /mypath/mydirectory/subject0000/mni/subject0000_T1_n4_mni.nii.gz --slice /mypath/mydirectory/subject0000/parc/subject0000_T1_n4_mni_seg_post.nii.gz --outdir /mypath/mydirectory/QC --imagegen /mypath/mydirectory/cerebellum_image_generator.py --label /mypath/mydirectory/colormap.txt --bbtext /mypath/mydirectory/QC/BoundingBox_failed_subjects.txt``  
+Example: ``./script_02_QC.sh --subject subject0000 --input /mypath/mydirectory/subject0000/mni/subject0000_T1_n4_mni.nii.gz --slice /mypath/mydirectory/subject0000/parc/subject0000_T1_n4_mni_seg_post.nii.gz --outdir /mypath/mydirectory/QC --imagegen /mypath/mydirectory/cerebellum_image_generator.py --label /mypath/mydirectory/ --bbtext /mypath/mydirectory/QC/BoundingBox_failed_subjects.txt``  
 
 A qsub wrapper can be created by the user for this script to run for large cohorts.  
 
