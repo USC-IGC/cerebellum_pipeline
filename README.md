@@ -70,7 +70,7 @@ This text file contains the labels and the RGB values for the 28 Cerebellum ROIs
 This script is inherently called by `script_02_QC.sh`. It assigns colors to cerebellum ROIs in the slice image based on the `colormap.txt` and overlays it on the input image with some transparency so that the underlaying anatomy is visible. It also checks for any over/incorrect segmentations outside a defined cerebellum bounding box (the dimensions of the bounding box have been chosen based on where one might expect to locate the cerebellum in a 3D image) and generates a text file containing the subject names if they failed the check. It generates an img folder within the output directory that contains .png files of the various anatomical views(axial/coronal/sagittal) and 10 slices per view of a subject which show maximum information of the cerebellum ROIs required for QC.  
 #### Anatomy of script_02_QC.sh call:
     script_02_QC.sh --subject <subjectID> --input </path/mni/xxxx_n4_mni.nii.gz> --slice </path/parc/xxxx_n4_mni_seg_post.nii.gz> --outdir <output/directory> 
-                    --imagegen <cerebellum_image_generator.py/path> --label <colormap.txt> --bbtext <boundingboxfile/path/>   
+                    --imagegen <cerebellum_image_generator.py/path> --label <colormap.txt> --bbfile <boundingboxfile/path/>   
 
 `--subject`: This the subjectID to be run  
 `--input`: The absolute path to the Input image (This is the /mni/xxxx_n4_mni.nii.gz inside AC3 output directory of a subject)  
@@ -78,9 +78,9 @@ This script is inherently called by `script_02_QC.sh`. It assigns colors to cere
 `--outdir`: The absolute path to the output directory to store pngs  
 `--imagegen`:  Path to cerebellum_image_generator.py  
 `--label`: Path to colormap.txt file  
-`--bbtext`: Path along with textfile name to store bounding box failed subjects  
+`--bbfile`: Path along with textfile name to store bounding box failed subjects  
 
-Example: ``./script_02_QC.sh --subject subject0000 --input /mypath/mydirectory/subject0000/mni/subject0000_T1_n4_mni.nii.gz --slice /mypath/mydirectory/subject0000/parc/subject0000_T1_n4_mni_seg_post.nii.gz --outdir /mypath/mydirectory/QC --imagegen /mypath/mydirectory/cerebellum_image_generator.py --label /mypath/mydirectory/ --bbtext /mypath/mydirectory/QC/BoundingBox_failed_subjects.txt``  
+Example: ``./script_02_QC.sh --subject subject0000 --input /mypath/mydirectory/subject0000/mni/subject0000_T1_n4_mni.nii.gz --slice /mypath/mydirectory/subject0000/parc/subject0000_T1_n4_mni_seg_post.nii.gz --outdir /mypath/mydirectory/QC --imagegen /mypath/mydirectory/cerebellum_image_generator.py --label /mypath/mydirectory/ --bbfile /mypath/mydirectory/QC/BoundingBox_failed_subjects.txt``  
 
 A qsub wrapper can be created by the user for this script to run for large cohorts.  
 
