@@ -9,7 +9,7 @@ function Usage(){
 
 Usage:
 
-$(basename "$0") --subject <subjectID> --input </path/mni/xxxx_n4_mni.nii.gz> --slice </path/parc/xxxx_n4_mni_seg_post.nii.gz> --outdir <output/directory> --imagegen <cerebellum_image_generator.py/path> --label <colormap.txt> --bbtext <boundingboxfile/path/>
+$(basename "$0") --subject <subjectID> --input </path/mni/xxxx_n4_mni.nii.gz> --slice </path/parc/xxxx_n4_mni_seg_post.nii.gz> --outdir <output/directory> --imagegen <cerebellum_image_generator.py/path> --label <colormap.txt> --bbfile <boundingboxfile/path/>
 
 Mandatory arguments:
     --subject   Provide a subject ID
@@ -18,7 +18,7 @@ Mandatory arguments:
     --outdir    Output directory to store pngs
     --imagegen  cerebellum_image_generator.py script path
     --label     colormap.txt file path
-    --bbtext    Path along with textfile name to store bounding box failed subjects
+    --bbfile    Path along with textfile name to store bounding box failed subjects
 
 Please provide absolute path in all arguments
 
@@ -60,8 +60,8 @@ while [[ $# -gt 0 ]]; do
             colormap_txt=$2
             shift 2
             ;;
-        --bbtext)
-            bbtext=$2
+        --bbfile)
+            bbfile=$2
             shift 2
             ;;
         *) # Unexpected option
@@ -71,8 +71,8 @@ while [[ $# -gt 0 ]]; do
 done
 
 # Checking mandatory arguments
-if [[ -z ${subjectID} || -z ${input_image} ||  -z ${slice_image} || -z ${output_dir} || -z ${image_generator_dir} || -z ${colormap_txt} || -z ${bbtext} ]]; then
-	echo "ERROR: --subject --input, --slice, --outdir, --imagegen --label --bbtext are mandatory arguments. Please see usage: \n"
+if [[ -z ${subjectID} || -z ${input_image} ||  -z ${slice_image} || -z ${output_dir} || -z ${image_generator_dir} || -z ${colormap_txt} || -z ${bbfile} ]]; then
+	echo "ERROR: --subject --input, --slice, --outdir, --imagegen --label --bbfile are mandatory arguments. Please see usage: \n"
     Usage >&2
 fi
 
@@ -86,9 +86,9 @@ mkdir -p ${output_dir}/img/${subjectID}
 echo "Cerebellum image generation script located at: ${image_generator_dir}"
 echo "Colormap text file: ${colormap_txt}"
 
-python ${image_generator_dir}/cerebellum_image_generator.py -i $input_image -l $slice_image -c ${colormap_txt}/colormap.txt -o ${output_dir}/img/${subjectID}/ -t ${bbtext} -s ${subjectID} 
+python ${image_generator_dir}/cerebellum_image_generator.py -i $input_image -l $slice_image -c ${colormap_txt}/colormap.txt -o ${output_dir}/img/${subjectID}/ -t ${bbfile} -s ${subjectID} 
 
 chmod -R 770 ${output_dir}/img/${subjectID}
 
 echo "Done generating all pngs at: ${output_dir}/img/${subjectID}"
-echo "Bounding box failed subject info at: $bbtext"
+echo "Bounding box failed subject info at: $bbfile"
