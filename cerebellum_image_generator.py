@@ -12,7 +12,7 @@ warnings.simplefilter('ignore')
 plt.axis('off')
 
 # Argument Parsing
-desc = ('Generates PNGs images for axial, coronal, and sagittal views)
+desc = ('Generates PNGs images for axial, coronal, and sagittal views')
 parser = argparse.ArgumentParser(description=desc,
                                  formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
@@ -123,4 +123,3 @@ else:
 
 
 print("Done")
-
